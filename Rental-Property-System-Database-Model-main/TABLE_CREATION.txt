@@ -1,0 +1,135 @@
+Table Creation
+
+--Creating the apartmentType Table
+CREATE TABLE apartmentType (
+    TypeID INT PRIMARY KEY NOT NULL,
+    TypeNames VARCHAR(200) NOT NULL,
+    TypePrice INT NOT NULL
+);
+
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| TypeID    | int          | NO   | PRI | NULL    |       |
+| TypeNames | varchar(200) | NO   |     | NULL    |       |
+| TypePrice | int          | NO   |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+
+---------------------------------------------------------------------------------------------------------------------------
+--Creating the apartment Table
+CREATE TABLE apartment (
+    ApartmentID INT PRIMARY KEY NOT NULL,
+    ApartmentNumber VARCHAR(200) NOT NULL,
+    ApartmentArea FLOAT NOT NULL,
+    TypeID INT NOT NULL,
+    FOREIGN KEY (TypeID) REFERENCES apartmentType(TypeID)
+);
+
+
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| ApartmentID     | int          | NO   | PRI | NULL    |       |
+| ApartmentNumber | varchar(200) | NO   |     | NULL    |       |
+| ApartmentArea   | float        | NO   |     | NULL    |       |
+| TypeID          | int          | NO   | MUL | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+
+
+-----------------------------------------------------------------------------------------------------------------
+Creating the bank Table
+CREATE TABLE bank (
+    BankID INT PRIMARY KEY NOT NULL,
+    BankName VARCHAR(200),
+    RegistrationCode INT UNIQUE NOT NULL
+);
+
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| BankID           | int          | NO   | PRI | NULL    |       |
+| BankName         | varchar(200) | YES  |     | NULL    |       |
+| RegistrationCode | int          | NO   | UNI | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+
+
+----------------------------------------------------------------------------------------------------------------------------
+ CREATE TABLE tenant(
+    TenantID INT PRIMARY KEY NOT NULL,
+    TenantNames VARCHAR(200) NOT NULL,
+    TenantLegalAddress VARCHAR(200) UNIQUE NOT NULL,
+    BankID INT NOT NULL,
+    BankDirector VARCHAR(200) NOT NULL,
+    Characteristic VARCHAR(200),
+    FOREIGN KEY (BankID) REFERENCES bank(BankID)
+);
+
++--------------------+--------------+------+-----+---------+-------+
+| Field              | Type         | Null | Key | Default | Extra |
++--------------------+--------------+------+-----+---------+-------+
+| TenantID           | int          | NO   | PRI | NULL    |       |
+| TenantNames        | varchar(200) | NO   |     | NULL    |       |
+| TenantLegalAddress | varchar(200) | NO   | UNI | NULL    |       |
+| BankID             | int          | NO   | MUL | NULL    |       |
+| BankDirector       | varchar(200) | NO   |     | NULL    |       |
+| Characteristic     | varchar(200) | YES  |     | NULL    |       |
++--------------------+--------------+------+-----+---------+-------+
+
+
+--------------------------------------------------------------------------------------------------
+--Creating the rent Table
+
+CREATE TABLE rent (
+    RentID INT PRIMARY KEY NOT NULL,
+    TenantID INT NOT NULL,
+    ApartmentID INT NOT NULL,
+    TermFrom DATE NOT NULL,
+    TermUpto DATE NOT NULL,
+    FOREIGN KEY (TenantID) REFERENCES tenant(TenantID),
+    FOREIGN KEY (ApartmentID) REFERENCES apartment(ApartmentID)
+);
+
++-------------+------+------+-----+---------+-------+
+| Field       | Type | Null | Key | Default | Extra |
++-------------+------+------+-----+---------+-------+
+| RentID      | int  | NO   | PRI | NULL    |       |
+| TenantID    | int  | NO   | MUL | NULL    |       |
+| ApartmentID | int  | NO   | MUL | NULL    |       |
+| TermFrom    | date | NO   |     | NULL    |       |
+| TermUpto    | date | NO   |     | NULL    |       |
++-------------+------+------+-----+---------+-------+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+--Creating the counts Table
+CREATE TABLE counts (
+    CountsID INT PRIMARY KEY NOT NULL,
+    CountsSum INT NOT NULL,
+    CountsDate DATE NOT NULL,
+    CountsPenia INT NOT NULL,
+    TenantID INT NOT NULL,
+    FOREIGN KEY (TenantID) REFERENCES tenant(TenantID)
+);
+
+
+
+
++-------------+------+------+-----+---------+-------+
+| Field       | Type | Null | Key | Default | Extra |
++-------------+------+------+-----+---------+-------+
+| CountsID    | int  | NO   | PRI | NULL    |       |
+| CountsSum   | int  | NO   |     | NULL    |       |
+| CountsDate  | date | NO   |     | NULL    |       |
+| CountsPenia | int  | NO   |     | NULL    |       |
+| TenantID    | int  | NO   | MUL | NULL    |       |
++-------------+------+------+-----+---------+-------+
+
+
+TO SHOW TABLE INFO 
+USE "DESCRIBE <TABLE_NAME>;"
+1)   DESCRIBE APARTMENTTYPE;
+2)   DESCRIBE APARTMENT;
+3)   DESCRIBE BANK;
+4)   DESCRIBE TENANT;
+5)   DESCRIBE RENT;
+6)   DESCRIBE COUNTS;

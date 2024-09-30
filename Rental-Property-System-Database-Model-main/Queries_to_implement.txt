@@ -1,0 +1,68 @@
+__________________________________________________________________________________________________
+-----------------------0 Level-----------------
+1. Get the names of all tenants.
+
+2. Get the names of all apartments and their corresponding types.
+
+3. Get all tenants who rented apartments from a specific bank.
+
+4. Get all rents for a specific tenant.
+
+5. Get total rent collected from all tenants.
+
+__________________________________________________________________________________________________
+-----------------------Medium Level-----------------
+1. Update the rent amount for a specific tenant.
+
+2. Change the bank name for a specific tenant.
+
+3. Update apartment type price.
+
+4. Change tenant address.
+
+5. Set the rental term to 1 year for all tenants.
+
+___________________________________________________________________________________________________
+----------------------Join Queries----------------------------
+1. List all tenants along with their rented apartment numbers and apartment types.
+
+2. Find all tenants who have rented more than one apartment.
+
+3. Get the total rent collected for each apartment type.
+
+4. Find the most expensive apartment type rented and the corresponding tenant details.
+
+5. List all tenants who rented apartments in the same city.
+
+6. Find tenants who have not paid rent in the last 6 months.
+
+7. Find the average rent collected per bank.
+
+8. List the tenants along with the total rent they have paid so far.
+
+9. Find tenants who are renting the most expensive apartment in each city.
+
+10. Get a list of all tenants whose bank has more than 5 tenants associated with it.
+
+11. Find all apartments that have never been rented.
+
+12. Find the number of tenants renting apartments from each bank, grouped by bank.
+
+13. Find the tenants who paid more than the average rent.
+
+14. Find the most rented apartment and its total number of rentals.
+
+15. Get a list of tenants who rented apartments from banks in a different city than their legal address.
+
+
+____________________________________________________________________________________________________________
+-----------------------Delete Queries-------------------------
+1. Delete a specific tenant.
+
+2. Delete all rents for a specific tenant.
+
+3. Delete a specific bank.
+
+4. Delete a specific apartment.
+
+5. Delete all entries from counts table.

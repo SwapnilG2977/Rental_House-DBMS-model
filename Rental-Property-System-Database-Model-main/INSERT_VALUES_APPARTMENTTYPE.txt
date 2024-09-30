@@ -1,0 +1,40 @@
+-- Adding entries to the "Apartment Types" table
+INSERT INTO apartmentType VALUES (1, '1 BHK', 15000);
+INSERT INTO apartmentType VALUES (2, '2 BHK', 25000);
+INSERT INTO apartmentType VALUES (3, '3 BHK', 35000);
+INSERT INTO apartmentType VALUES (4, 'Studio', 12000);
+INSERT INTO apartmentType VALUES (5, 'Penthouse', 60000);
+INSERT INTO apartmentType VALUES (6, 'Duplex', 40000);
+INSERT INTO apartmentType VALUES (7, 'Independent House', 30000);
+INSERT INTO apartmentType VALUES (8, 'Villa', 70000);
+INSERT INTO apartmentType VALUES (9, 'Farmhouse', 80000);
+INSERT INTO apartmentType VALUES (10, 'Serviced Apartment', 20000);
+INSERT INTO apartmentType VALUES (11, 'Luxury Apartment', 100000);
+INSERT INTO apartmentType VALUES (12, 'Co-Working Space', 18000);
+INSERT INTO apartmentType VALUES (13, 'Loft', 25000);
+INSERT INTO apartmentType VALUES (14, 'Resort Apartment', 90000);
+INSERT INTO apartmentType VALUES (15, 'Affordable Housing', 8000);
+
++--------+--------------------+-----------+
+| TypeID | TypeNames          | TypePrice |
++--------+--------------------+-----------+
+|      1 | 1 BHK              |     15000 |
+|      2 | 2 BHK              |     25000 |
+|      3 | 3 BHK              |     35000 |
+|      4 | Studio             |     12000 |
+|      5 | Penthouse          |     60000 |
+|      6 | Duplex             |     40000 |
+|      7 | Independent House  |     30000 |
+|      8 | Villa              |     70000 |
+|      9 | Farmhouse          |     80000 |
+|     10 | Serviced Apartment |     20000 |
+|     11 | Luxury Apartment   |    100000 |
+|     12 | Co-Working Space   |     18000 |
+|     13 | Loft               |     25000 |
+|     14 | Resort Apartment   |     90000 |
+|     15 | Affordable Housing |      8000 |
++--------+--------------------+-----------+
+
+
+
+USE "SELECT * FROM APARTMENTTYPE;" TO SHOW THE VALUES OF THE TABLE

@@ -1,0 +1,39 @@
+-- Adding entries to the "Tenants" table
+INSERT INTO tenant VALUES (1, 'Rajesh Kumar', '123 MG Road, Mumbai, Maharashtra', 1, 'Anjali Sharma', 'Software Engineer');
+INSERT INTO tenant VALUES (2, 'Sneha Singh', '456 NH8, Delhi', 2, 'Rahul Sharma', 'Teacher');
+INSERT INTO tenant VALUES (3, 'Amit Verma', '789 Linking Road, Mumbai', 3, 'Pooja Verma', 'Doctor');
+INSERT INTO tenant VALUES (4, 'Geeta Iyer', '321 Connaught Place, Delhi', 4, 'Kiran Iyer', 'Artist');
+INSERT INTO tenant VALUES (5, 'Sunil Yadav', '654 Marine Drive, Mumbai', 5, 'Anjali Yadav', 'Chef');
+INSERT INTO tenant VALUES (6, 'Priya Joshi', '987 Fort, Mumbai', 6, 'Amit Joshi', 'Entrepreneur');
+INSERT INTO tenant VALUES (7, 'Karan Bansal', '321 Mandi, Delhi', 7, 'Sonam Bansal', 'Lawyer');
+INSERT INTO tenant VALUES (8, 'Ravi Mehta', '456 Indore, Madhya Pradesh', 8, 'Neha Mehta', 'Accountant');
+INSERT INTO tenant VALUES (9, 'Vinay Gupta', '789 Pune, Maharashtra', 9, 'Suman Gupta', 'Consultant');
+INSERT INTO tenant VALUES (10, 'Rohit Sharma', '159 Ahmedabad, Gujarat', 10, 'Sita Sharma', 'Scientist');
+INSERT INTO tenant VALUES (11, 'Tanya Choudhury', '753 Surat, Gujarat', 11, 'Vikas Choudhury', 'Marketing Manager');
+INSERT INTO tenant VALUES (12, 'Suresh Reddy', '852 Hyderabad, Telangana', 12, 'Rita Reddy', 'Pharmacist');
+INSERT INTO tenant VALUES (13, 'Aishwarya Rai', '963 Chennai, Tamil Nadu', 13, 'Ajay Rai', 'Nurse');
+INSERT INTO tenant VALUES (14, 'Kartik Aaryan', '159 Kolkata, West Bengal', 14, 'Pooja Aaryan', 'Designer');
+INSERT INTO tenant VALUES (15, 'Deepak Bansal', '753 Jaipur, Rajasthan', 15, 'Naina Bansal', 'Researcher');
+
+
+
++----------+-----------------+----------------------------------+--------+-----------------+-------------------+
+| TenantID | TenantNames     | TenantLegalAddress               | BankID | BankDirector    | Characteristic    |
++----------+-----------------+----------------------------------+--------+-----------------+-------------------+
+|        1 | Rajesh Kumar    | 123 MG Road, Mumbai, Maharashtra |      1 | Anjali Sharma   | Software Engineer |
+|        2 | Sneha Singh     | 456 NH8, Delhi                   |      2 | Rahul Sharma    | Teacher           |
+|        3 | Amit Verma      | 789 Linking Road, Mumbai         |      3 | Pooja Verma     | Doctor            |
+|        4 | Geeta Iyer      | 321 Connaught Place, Delhi       |      4 | Kiran Iyer      | Artist            |
+|        5 | Sunil Yadav     | 654 Marine Drive, Mumbai         |      5 | Anjali Yadav    | Chef              |
+|        6 | Priya Joshi     | 987 Fort, Mumbai                 |      6 | Amit Joshi      | Entrepreneur      |
+|        7 | Karan Bansal    | 321 Mandi, Delhi                 |      7 | Sonam Bansal    | Lawyer            |
+|        8 | Ravi Mehta      | 456 Indore, Madhya Pradesh       |      8 | Neha Mehta      | Accountant        |
+|        9 | Vinay Gupta     | 789 Pune, Maharashtra            |      9 | Suman Gupta     | Consultant        |
+|       10 | Rohit Sharma    | 159 Ahmedabad, Gujarat           |     10 | Sita Sharma     | Scientist         |
+|       11 | Tanya Choudhury | 753 Surat, Gujarat               |     11 | Vikas Choudhury | Marketing Manager |
+|       12 | Suresh Reddy    | 852 Hyderabad, Telangana         |     12 | Rita Reddy      | Pharmacist        |
+|       13 | Aishwarya Rai   | 963 Chennai, Tamil Nadu          |     13 | Ajay Rai        | Nurse             |
+|       14 | Kartik Aaryan   | 159 Kolkata, West Bengal         |     14 | Pooja Aaryan    | Designer          |
+|       15 | Deepak Bansal   | 753 Jaipur, Rajasthan            |     15 | Naina Bansal    | Researcher        |
++----------+-----------------+----------------------------------+--------+-----------------+-------------------+
+Use Select * from tenant; to show the table values;

@@ -1,0 +1,938 @@
+__________________________________________________________________________________________________
+-----------------------0 Level-----------------
+1. Get the names of all tenants.
+-- Retrieving names of all tenants
+SELECT TenantNames FROM tenant;
+
++-----------------+
+| TenantNames     |
++-----------------+
+| Rajesh Kumar    |
+| Sneha Singh     |
+| Amit Verma      |
+| Geeta Iyer      |
+| Sunil Yadav     |
+| Priya Joshi     |
+| Karan Bansal    |
+| Ravi Mehta      |
+| Vinay Gupta     |
+| Rohit Sharma    |
+| Tanya Choudhury |
+| Suresh Reddy    |
+| Aishwarya Rai   |
+| Kartik Aaryan   |
+| Deepak Bansal   |
++-----------------+
+15 rows in set (0.00 sec)
+============================================================================================================================================================================================================
+2. Get the names of all apartments and their corresponding types.
+-- Retrieving names of all apartments along with their types
+SELECT a.ApartmentNumber, at.TypeNames
+FROM apartment a
+JOIN apartmentType at ON a.TypeID = at.TypeID;
+
++-----------------+--------------------+
+| ApartmentNumber | TypeNames          |
++-----------------+--------------------+
+| A-101           | 1 BHK              |
+| D-404           | 1 BHK              |
+| B-202           | 2 BHK              |
+| E-505           | 2 BHK              |
+| C-303           | 3 BHK              |
+| F-606           | 3 BHK              |
+| G-707           | Studio             |
+| H-808           | Penthouse          |
+| I-909           | Duplex             |
+| J-1010          | Independent House  |
+| K-1111          | Villa              |
+| L-1212          | Farmhouse          |
+| M-1313          | Serviced Apartment |
+| N-1414          | Luxury Apartment   |
+| O-1515          | Co-Working Space   |
++-----------------+--------------------+
+15 rows in set (0.01 sec)
+
+============================================================================================================================================================================================================
+3. Get all tenants who rented apartments from a specific bank.
+-- Retrieving tenants associated with a specific bank
+SELECT t.TenantNames
+FROM tenant t
+WHERE t.BankID = 1; -- Replace with desired BankID
+
++--------------+
+| TenantNames  |
++--------------+
+| Rajesh Kumar |
++--------------+
+1 row in set (0.00 sec)
+
+-- Retrieving tenants associated with a  bank 2
+SELECT t.TenantNames
+FROM tenant t
+WHERE t.BankID = 2; 
+
++-------------+
+| TenantNames |
++-------------+
+| Sneha Singh |
++-------------+
+1 row in set (0.00 sec)
+
+
+============================================================================================================================================================================================================
+4. Get all rents for a specific tenant.
+-- Retrieving rent records for a specific tenant
+SELECT r.RentID, r.TermFrom, r.TermUpto
+FROM rent r
+JOIN tenant t ON r.TenantID = t.TenantID
+WHERE t.TenantID = 1; -- Replace with desired TenantID
+
++--------+------------+------------+
+| RentID | TermFrom   | TermUpto   |
++--------+------------+------------+
+|      1 | 2022-05-01 | 2023-05-01 |
++--------+------------+------------+
+
+-- Retrieving rent records for a tenant 4
+SELECT r.RentID, r.TermFrom, r.TermUpto
+FROM rent r
+JOIN tenant t ON r.TenantID = t.TenantID
+WHERE t.TenantID = 4; 
+
++--------+------------+------------+
+| RentID | TermFrom   | TermUpto   |
++--------+------------+------------+
+|      4 | 2022-03-01 | 2023-03-01 |
++--------+------------+------------+
+1 row in set (0.00 sec)
+
+============================================================================================================================================================================================================
+5. Get total rent collected from all tenants.
+-- Calculating total rent collected
+SELECT SUM(CountsSum) AS TotalRent
+FROM counts;
+
++-----------+
+| TotalRent |
++-----------+
+|    675000 |
++-----------+
+1 row in set (0.01 sec)
+
+
+============================================================================================================================================================================================================
+============================================================================================================================================================================================================
+__________________________________________________________________________________________________
+-----------------------Medium Level-----------------
+1. Update the rent amount for a specific tenant.
+-- Updating rent amount for a specific tenant
+UPDATE counts
+SET CountsSum = 60000
+WHERE TenantID = 1; -- Replace with desired TenantID
+
+Previous counts Table:                                            (use "Select * from Counts;" to shoe table values)
++----------+-----------+------------+-------------+----------+
+| CountsID | CountsSum | CountsDate | CountsPenia | TenantID |
++----------+-----------+------------+-------------+----------+
+|        1 |     10000 | 2023-01-01 |           0 |        1 |
+|        2 |     15000 | 2023-02-01 |           0 |        2 |
+|        3 |     20000 | 2023-03-01 |           0 |        3 |
+|        4 |     25000 | 2023-04-01 |           0 |        4 |
+|        5 |     30000 | 2023-05-01 |           0 |        5 |
+|        6 |     35000 | 2023-06-01 |           0 |        6 |
+|        7 |     40000 | 2023-07-01 |           0 |        7 |
+|        8 |     45000 | 2023-08-01 |           0 |        8 |
+|        9 |     50000 | 2023-09-01 |           0 |        9 |
+|       10 |     55000 | 2023-10-01 |           0 |       10 |
+|       11 |     60000 | 2023-11-01 |           0 |       11 |
+|       12 |     65000 | 2023-12-01 |           0 |       12 |
+|       13 |     70000 | 2024-01-01 |           0 |       13 |
+|       14 |     75000 | 2024-02-01 |           0 |       14 |
+|       15 |     80000 | 2024-03-01 |           0 |       15 |
++----------+-----------+------------+-------------+----------+
+
+After Query execution counts table:
++----------+-----------+------------+-------------+----------+
+| CountsID | CountsSum | CountsDate | CountsPenia | TenantID |
++----------+-----------+------------+-------------+----------+
+|        1 |     60000 | 2023-01-01 |           0 |        1 |
+|        2 |     15000 | 2023-02-01 |           0 |        2 |
+|        3 |     20000 | 2023-03-01 |           0 |        3 |
+|        4 |     25000 | 2023-04-01 |           0 |        4 |
+|        5 |     30000 | 2023-05-01 |           0 |        5 |
+|        6 |     35000 | 2023-06-01 |           0 |        6 |
+|        7 |     40000 | 2023-07-01 |           0 |        7 |
+|        8 |     45000 | 2023-08-01 |           0 |        8 |
+|        9 |     50000 | 2023-09-01 |           0 |        9 |
+|       10 |     55000 | 2023-10-01 |           0 |       10 |
+|       11 |     60000 | 2023-11-01 |           0 |       11 |
+|       12 |     65000 | 2023-12-01 |           0 |       12 |
+|       13 |     70000 | 2024-01-01 |           0 |       13 |
+|       14 |     75000 | 2024-02-01 |           0 |       14 |
+|       15 |     80000 | 2024-03-01 |           0 |       15 |
++----------+-----------+------------+-------------+----------+
+15 rows in set (0.00 sec)
+
+============================================================================================================================================================================================================
+2. Change the bank name for a specific tenant.
+-- Updating bank name for a specific tenant
+UPDATE bank
+SET BankName = 'Bank of Maharashtra'
+WHERE BankID = 1; -- Replace with desired BankID
+
+Previous Bank Table:                                            (use "Select * from Bank;" to shoe table values)
++--------+-----------------------+------------------+
+| BankID | BankName              | RegistrationCode |
++--------+-----------------------+------------------+
+|      1 | State Bank of India   |              101 |
+|      2 | HDFC Bank             |              102 |
+|      3 | ICICI Bank            |              103 |
+|      4 | Axis Bank             |              104 |
+|      5 | Punjab National Bank  |              105 |
+|      6 | Kotak Mahindra Bank   |              106 |
+|      7 | Bank of Baroda        |              107 |
+|      8 | Canara Bank           |              108 |
+|      9 | Indian Bank           |              109 |
+|     10 | Union Bank of India   |              110 |
+|     11 | Bank of India         |              111 |
+|     12 | Yes Bank              |              112 |
+|     13 | RBL Bank              |              113 |
+|     14 | IDFC First Bank       |              114 |
+|     15 | Central Bank of India |              115 |
++--------+-----------------------+------------------+
+
+After Query execution Bank table:
++--------+-----------------------+------------------+
+| BankID | BankName              | RegistrationCode |
++--------+-----------------------+------------------+
+|      1 | Bank of Maharashtra   |              101 |
+|      2 | HDFC Bank             |              102 |
+|      3 | ICICI Bank            |              103 |
+|      4 | Axis Bank             |              104 |
+|      5 | Punjab National Bank  |              105 |
+|      6 | Kotak Mahindra Bank   |              106 |
+|      7 | Bank of Baroda        |              107 |
+|      8 | Canara Bank           |              108 |
+|      9 | Indian Bank           |              109 |
+|     10 | Union Bank of India   |              110 |
+|     11 | Bank of India         |              111 |
+|     12 | Yes Bank              |              112 |
+|     13 | RBL Bank              |              113 |
+|     14 | IDFC First Bank       |              114 |
+|     15 | Central Bank of India |              115 |
++--------+-----------------------+------------------+
+15 rows in set (0.01 sec)
+
+============================================================================================================================================================================================================
+3. Update apartment type price.
+-- Updating the price of an apartment type
+UPDATE apartmentType
+SET TypePrice = 18000
+WHERE TypeID = 1; -- Replace with desired TypeID
+
+Previous Apartment Table:                                            (use "Select * from Apartment;" to shoe table values)
++--------+--------------------+-----------+
+| TypeID | TypeNames          | TypePrice |
++--------+--------------------+-----------+
+|      1 | 1 BHK              |     15000 |
+|      2 | 2 BHK              |     25000 |
+|      3 | 3 BHK              |     35000 |
+|      4 | Studio             |     12000 |
+|      5 | Penthouse          |     60000 |
+|      6 | Duplex             |     40000 |
+|      7 | Independent House  |     30000 |
+|      8 | Villa              |     70000 |
+|      9 | Farmhouse          |     80000 |
+|     10 | Serviced Apartment |     20000 |
+|     11 | Luxury Apartment   |    100000 |
+|     12 | Co-Working Space   |     18000 |
+|     13 | Loft               |     25000 |
+|     14 | Resort Apartment   |     90000 |
+|     15 | Affordable Housing |      8000 |
++--------+--------------------+-----------+
+
+After Query execution apartment table:
++--------+--------------------+-----------+
+| TypeID | TypeNames          | TypePrice |
++--------+--------------------+-----------+
+|      1 | 1 BHK              |     18000 |
+|      2 | 2 BHK              |     25000 |
+|      3 | 3 BHK              |     35000 |
+|      4 | Studio             |     12000 |
+|      5 | Penthouse          |     60000 |
+|      6 | Duplex             |     40000 |
+|      7 | Independent House  |     30000 |
+|      8 | Villa              |     70000 |
+|      9 | Farmhouse          |     80000 |
+|     10 | Serviced Apartment |     20000 |
+|     11 | Luxury Apartment   |    100000 |
+|     12 | Co-Working Space   |     18000 |
+|     13 | Loft               |     25000 |
+|     14 | Resort Apartment   |     90000 |
+|     15 | Affordable Housing |      8000 |
++--------+--------------------+-----------+
+15 rows in set (0.00 sec)
+
+============================================================================================================================================================================================================
+4. Change tenant address.
+-- Updating the address of a specific tenant
+UPDATE tenant
+SET TenantLegalAddress = 'Updated Address, Mumbai, Maharashtra'
+WHERE TenantID = 1; -- Replace with desired TenantID
+
+Previous tenant Table:                                            (use "Select * from Tenant;" to shoe table values)
++----------+-----------------+----------------------------------+--------+-----------------+-------------------+
+| TenantID | TenantNames     | TenantLegalAddress               | BankID | BankDirector    | Characteristic    |
++----------+-----------------+----------------------------------+--------+-----------------+-------------------+
+|        1 | Rajesh Kumar    | 123 MG Road, Mumbai, Maharashtra |      1 | Anjali Sharma   | Software Engineer |
+|        2 | Sneha Singh     | 456 NH8, Delhi                   |      2 | Rahul Sharma    | Teacher           |
+|        3 | Amit Verma      | 789 Linking Road, Mumbai         |      3 | Pooja Verma     | Doctor            |
+|        4 | Geeta Iyer      | 321 Connaught Place, Delhi       |      4 | Kiran Iyer      | Artist            |
+|        5 | Sunil Yadav     | 654 Marine Drive, Mumbai         |      5 | Anjali Yadav    | Chef              |
+|        6 | Priya Joshi     | 987 Fort, Mumbai                 |      6 | Amit Joshi      | Entrepreneur      |
+|        7 | Karan Bansal    | 321 Mandi, Delhi                 |      7 | Sonam Bansal    | Lawyer            |
+|        8 | Ravi Mehta      | 456 Indore, Madhya Pradesh       |      8 | Neha Mehta      | Accountant        |
+|        9 | Vinay Gupta     | 789 Pune, Maharashtra            |      9 | Suman Gupta     | Consultant        |
+|       10 | Rohit Sharma    | 159 Ahmedabad, Gujarat           |     10 | Sita Sharma     | Scientist         |
+|       11 | Tanya Choudhury | 753 Surat, Gujarat               |     11 | Vikas Choudhury | Marketing Manager |
+|       12 | Suresh Reddy    | 852 Hyderabad, Telangana         |     12 | Rita Reddy      | Pharmacist        |
+|       13 | Aishwarya Rai   | 963 Chennai, Tamil Nadu          |     13 | Ajay Rai        | Nurse             |
+|       14 | Kartik Aaryan   | 159 Kolkata, West Bengal         |     14 | Pooja Aaryan    | Designer          |
+|       15 | Deepak Bansal   | 753 Jaipur, Rajasthan            |     15 | Naina Bansal    | Researcher        |
++----------+-----------------+----------------------------------+--------+-----------------+-------------------+
+
+After Query execution Tenant table:
++----------+-----------------+--------------------------------------+--------+-----------------+-------------------+
+| TenantID | TenantNames     | TenantLegalAddress                   | BankID | BankDirector    | Characteristic    |
++----------+-----------------+--------------------------------------+--------+-----------------+-------------------+
+|        1 | Rajesh Kumar    | Updated Address, Mumbai, Maharashtra |      1 | Anjali Sharma   | Software Engineer |
+|        2 | Sneha Singh     | 456 NH8, Delhi                       |      2 | Rahul Sharma    | Teacher           |
+|        3 | Amit Verma      | 789 Linking Road, Mumbai             |      3 | Pooja Verma     | Doctor            |
+|        4 | Geeta Iyer      | 321 Connaught Place, Delhi           |      4 | Kiran Iyer      | Artist            |
+|        5 | Sunil Yadav     | 654 Marine Drive, Mumbai             |      5 | Anjali Yadav    | Chef              |
+|        6 | Priya Joshi     | 987 Fort, Mumbai                     |      6 | Amit Joshi      | Entrepreneur      |
+|        7 | Karan Bansal    | 321 Mandi, Delhi                     |      7 | Sonam Bansal    | Lawyer            |
+|        8 | Ravi Mehta      | 456 Indore, Madhya Pradesh           |      8 | Neha Mehta      | Accountant        |
+|        9 | Vinay Gupta     | 789 Pune, Maharashtra                |      9 | Suman Gupta     | Consultant        |
+|       10 | Rohit Sharma    | 159 Ahmedabad, Gujarat               |     10 | Sita Sharma     | Scientist         |
+|       11 | Tanya Choudhury | 753 Surat, Gujarat                   |     11 | Vikas Choudhury | Marketing Manager |
+|       12 | Suresh Reddy    | 852 Hyderabad, Telangana             |     12 | Rita Reddy      | Pharmacist        |
+|       13 | Aishwarya Rai   | 963 Chennai, Tamil Nadu              |     13 | Ajay Rai        | Nurse             |
+|       14 | Kartik Aaryan   | 159 Kolkata, West Bengal             |     14 | Pooja Aaryan    | Designer          |
+|       15 | Deepak Bansal   | 753 Jaipur, Rajasthan                |     15 | Naina Bansal    | Researcher        |
++----------+-----------------+--------------------------------------+--------+-----------------+-------------------+
+15 rows in set (0.00 sec)
+
+============================================================================================================================================================================================================
+5. Set the rental term to 1 year for all tenants.
+-- Updating rental term to 1 year for all tenants
+UPDATE rent
+SET TermUpto = DATE_ADD(TermFrom, INTERVAL 2 YEAR);
+
+Previous rent Table:                                            (use "Select * from Rent;" to shoe table values)
++--------+----------+-------------+------------+------------+
+| RentID | TenantID | ApartmentID | TermFrom   | TermUpto   |
++--------+----------+-------------+------------+------------+
+|      1 |        1 |           2 | 2022-05-01 | 2023-05-01 |
+|      2 |        2 |           1 | 2021-06-01 | 2022-06-01 |
+|      3 |        3 |           2 | 2021-09-01 | 2022-09-01 |
+|      4 |        4 |           3 | 2022-03-01 | 2023-03-01 |
+|      5 |        5 |           1 | 2022-11-01 | 2023-11-01 |
+|      6 |        6 |           2 | 2022-04-01 | 2023-04-01 |
+|      7 |        7 |           3 | 2021-12-01 | 2022-12-01 |
+|      8 |        8 |           1 | 2023-01-01 | 2024-01-01 |
+|      9 |        9 |           2 | 2023-02-01 | 2024-02-01 |
+|     10 |       10 |           3 | 2023-05-01 | 2024-05-01 |
+|     11 |       11 |           1 | 2023-06-01 | 2024-06-01 |
+|     12 |       12 |           2 | 2023-07-01 | 2024-07-01 |
+|     13 |       13 |           3 | 2023-08-01 | 2024-08-01 |
+|     14 |       14 |           1 | 2023-09-01 | 2024-09-01 |
+|     15 |       15 |           2 | 2023-10-01 | 2024-10-01 |
++--------+----------+-------------+------------+------------+
+
+After Query execution Rent table:
++--------+----------+-------------+------------+------------+
+| RentID | TenantID | ApartmentID | TermFrom   | TermUpto   |
++--------+----------+-------------+------------+------------+
+|      1 |        1 |           2 | 2022-05-01 | 2024-05-01 |
+|      2 |        2 |           1 | 2021-06-01 | 2023-06-01 |
+|      3 |        3 |           2 | 2021-09-01 | 2023-09-01 |
+|      4 |        4 |           3 | 2022-03-01 | 2024-03-01 |
+|      5 |        5 |           1 | 2022-11-01 | 2024-11-01 |
+|      6 |        6 |           2 | 2022-04-01 | 2024-04-01 |
+|      7 |        7 |           3 | 2021-12-01 | 2023-12-01 |
+|      8 |        8 |           1 | 2023-01-01 | 2025-01-01 |
+|      9 |        9 |           2 | 2023-02-01 | 2025-02-01 |
+|     10 |       10 |           3 | 2023-05-01 | 2025-05-01 |
+|     11 |       11 |           1 | 2023-06-01 | 2025-06-01 |
+|     12 |       12 |           2 | 2023-07-01 | 2025-07-01 |
+|     13 |       13 |           3 | 2023-08-01 | 2025-08-01 |
+|     14 |       14 |           1 | 2023-09-01 | 2025-09-01 |
+|     15 |       15 |           2 | 2023-10-01 | 2025-10-01 |
++--------+----------+-------------+------------+------------+
+15 rows in set (0.00 sec)
+
+============================================================================================================================================================================================================
+============================================================================================================================================================================================================
+___________________________________________________________________________________________________
+----------------------Join Queries----------------------------
+1. List all tenants along with their rented apartment numbers and apartment types.
+-- Retrieve tenant names, apartment numbers, and apartment types
+SELECT t.TenantNames, a.ApartmentNumber, at.TypeNames
+FROM tenant t
+JOIN rent r ON t.TenantID = r.TenantID
+JOIN apartment a ON r.ApartmentID = a.ApartmentID
+JOIN apartmentType at ON a.TypeID = at.TypeID;
+
++-----------------+-----------------+-----------+
+| TenantNames     | ApartmentNumber | TypeNames |
++-----------------+-----------------+-----------+
+| Sneha Singh     | A-101           | 1 BHK     |
+| Sunil Yadav     | A-101           | 1 BHK     |
+| Ravi Mehta      | A-101           | 1 BHK     |
+| Tanya Choudhury | A-101           | 1 BHK     |
+| Kartik Aaryan   | A-101           | 1 BHK     |
+| Rajesh Kumar    | B-202           | 2 BHK     |
+| Amit Verma      | B-202           | 2 BHK     |
+| Priya Joshi     | B-202           | 2 BHK     |
+| Vinay Gupta     | B-202           | 2 BHK     |
+| Suresh Reddy    | B-202           | 2 BHK     |
+| Deepak Bansal   | B-202           | 2 BHK     |
+| Geeta Iyer      | C-303           | 3 BHK     |
+| Karan Bansal    | C-303           | 3 BHK     |
+| Rohit Sharma    | C-303           | 3 BHK     |
+| Aishwarya Rai   | C-303           | 3 BHK     |
++-----------------+-----------------+-----------+
+15 rows in set (0.01 sec)
+
+============================================================================================================================================================================================================
+2. Find all tenants who have rented more than one apartment.
+-- Retrieve tenants who have rented more than one apartment
+SELECT t.TenantNames, COUNT(r.ApartmentID) AS ApartmentCount
+FROM tenant t
+JOIN rent r ON t.TenantID = r.TenantID
+GROUP BY t.TenantNames
+HAVING COUNT(r.ApartmentID) > 1;
+
+Empty set (0.01 sec)   --(int the data we provided theres no one who have rented more than one apartment)
+
+============================================================================================================================================================================================================
+3. Get the total rent collected for each apartment type.
+-- Retrieve total rent collected per apartment type
+SELECT at.TypeNames, SUM(c.CountsSum) AS TotalRentCollected
+FROM counts c
+JOIN tenant t ON c.TenantID = t.TenantID
+JOIN rent r ON t.TenantID = r.TenantID
+JOIN apartment a ON r.ApartmentID = a.ApartmentID
+JOIN apartmentType at ON a.TypeID = at.TypeID
+GROUP BY at.TypeNames;
+
++-----------+--------------------+
+| TypeNames | TotalRentCollected |
++-----------+--------------------+
+| 1 BHK     |             225000 |
+| 2 BHK     |             310000 |
+| 3 BHK     |             190000 |
++-----------+--------------------+
+3 rows in set (0.00 sec)
+
+============================================================================================================================================================================================================
+4. Find the most expensive apartment type rented and the corresponding tenant details.
+-- Retrieve the most expensive apartment type rented along with tenant details
+SELECT t.TenantNames, a.ApartmentNumber, at.TypeNames, at.TypePrice
+FROM rent r
+JOIN apartment a ON r.ApartmentID = a.ApartmentID
+JOIN apartmentType at ON a.TypeID = at.TypeID
+JOIN tenant t ON r.TenantID = t.TenantID
+WHERE at.TypePrice = (SELECT MAX(TypePrice) FROM apartmentType);
+
+Empty set (0.01 sec)                --(as in the data we provided theres no one who have rented more than one so theres no comparison for cost)
+
+============================================================================================================================================================================================================
+5. List all tenants who rented apartments in the same city.
+-- Retrieve tenants who rented apartments in the same city based on the address
+SELECT t1.TenantNames AS Tenant1, t2.TenantNames AS Tenant2, t1.TenantLegalAddress
+FROM tenant t1
+JOIN tenant t2 ON t1.TenantLegalAddress = t2.TenantLegalAddress
+WHERE t1.TenantID <> t2.TenantID;
+
+Empty set (0.00 sec)                     --(as in the data we provided theres no one who have rented more than one so there is no in the same city too)
+
+============================================================================================================================================================================================================
+6. Find tenants who have not paid rent in the last 6 months.
+-- Retrieve tenants who have not paid rent in the last 6 months
+SELECT t.TenantNames
+FROM tenant t
+LEFT JOIN counts c ON t.TenantID = c.TenantID
+WHERE c.CountsDate < DATE_ADD(CURDATE(), INTERVAL -6 MONTH)
+   OR c.CountsDate IS NULL;
++-----------------+
+| TenantNames     |
++-----------------+
+| Rajesh Kumar    |
+| Sneha Singh     |
+| Amit Verma      |
+| Geeta Iyer      |
+| Sunil Yadav     |
+| Priya Joshi     |
+| Karan Bansal    |
+| Ravi Mehta      |
+| Vinay Gupta     |
+| Rohit Sharma    |
+| Tanya Choudhury |
+| Suresh Reddy    |
+| Aishwarya Rai   |
+| Kartik Aaryan   |
+| Deepak Bansal   |
++-----------------+
+15 rows in set (0.01 sec)   --(as we have updated the databse with 1year it will give all enteries)
+---- try for 18 months
+
+-- Retrieve tenants who have not paid rent in the last 18 months
+SELECT t.TenantNames
+FROM tenant t
+LEFT JOIN counts c ON t.TenantID = c.TenantID
+WHERE c.CountsDate < DATE_ADD(CURDATE(), INTERVAL -18 MONTH) OR c.CountsDate IS NULL;
+
++--------------+
+| TenantNames  |
++--------------+
+| Rajesh Kumar |
+| Sneha Singh  |
+| Amit Verma   |
++--------------+
+3 rows in set (0.00 sec)
+
+============================================================================================================================================================================================================
+7. Find the average rent collected per bank.
+-- Retrieve the average rent collected from tenants per bank
+SELECT b.BankName, AVG(c.CountsSum) AS AvgRentCollected
+FROM bank b
+JOIN tenant t ON b.BankID = t.BankID
+JOIN counts c ON t.TenantID = c.TenantID
+GROUP BY b.BankName;
+
++-----------------------+------------------+
+| BankName              | AvgRentCollected |
++-----------------------+------------------+
+| Bank of Maharashtra   |       60000.0000 |
+| HDFC Bank             |       15000.0000 |
+| ICICI Bank            |       20000.0000 |
+| Axis Bank             |       25000.0000 |
+| Punjab National Bank  |       30000.0000 |
+| Kotak Mahindra Bank   |       35000.0000 |
+| Bank of Baroda        |       40000.0000 |
+| Canara Bank           |       45000.0000 |
+| Indian Bank           |       50000.0000 |
+| Union Bank of India   |       55000.0000 |
+| Bank of India         |       60000.0000 |
+| Yes Bank              |       65000.0000 |
+| RBL Bank              |       70000.0000 |
+| IDFC First Bank       |       75000.0000 |
+| Central Bank of India |       80000.0000 |
++-----------------------+------------------+
+15 rows in set (0.00 sec)
+
+============================================================================================================================================================================================================
+8. List the tenants along with the total rent they have paid so far.
+-- Retrieve tenants and the total rent they have paid
+SELECT t.TenantNames, SUM(c.CountsSum) AS TotalRentPaid
+FROM tenant t
+JOIN counts c ON t.TenantID = c.TenantID
+GROUP BY t.TenantNames;
+
++-----------------+---------------+
+| TenantNames     | TotalRentPaid |
++-----------------+---------------+
+| Rajesh Kumar    |         60000 |
+| Sneha Singh     |         15000 |
+| Amit Verma      |         20000 |
+| Geeta Iyer      |         25000 |
+| Sunil Yadav     |         30000 |
+| Priya Joshi     |         35000 |
+| Karan Bansal    |         40000 |
+| Ravi Mehta      |         45000 |
+| Vinay Gupta     |         50000 |
+| Rohit Sharma    |         55000 |
+| Tanya Choudhury |         60000 |
+| Suresh Reddy    |         65000 |
+| Aishwarya Rai   |         70000 |
+| Kartik Aaryan   |         75000 |
+| Deepak Bansal   |         80000 |
++-----------------+---------------+
+15 rows in set (0.00 sec)
+
+============================================================================================================================================================================================================
+9. Find tenants who are renting the most expensive apartment in each city.
+-- Retrieve tenants renting the most expensive apartment in each city
+WITH MaxApartmentPrice AS (
+    SELECT t.TenantLegalAddress, MAX(at.TypePrice) AS MaxPrice
+    FROM tenant t
+    JOIN rent r ON t.TenantID = r.TenantID
+    JOIN apartment a ON r.ApartmentID = a.ApartmentID
+    JOIN apartmentType at ON a.TypeID = at.TypeID
+    GROUP BY t.TenantLegalAddress
+)
+SELECT t.TenantNames, t.TenantLegalAddress, at.TypePrice
+FROM tenant t
+JOIN rent r ON t.TenantID = r.TenantID
+JOIN apartment a ON r.ApartmentID = a.ApartmentID
+JOIN apartmentType at ON a.TypeID = at.TypeID
+JOIN MaxApartmentPrice mp ON t.TenantLegalAddress = mp.TenantLegalAddress AND at.TypePrice = mp.MaxPrice;
+
++-----------------+--------------------------------------+-----------+
+| TenantNames     | TenantLegalAddress                   | TypePrice |
++-----------------+--------------------------------------+-----------+
+| Rohit Sharma    | 159 Ahmedabad, Gujarat               |     35000 |
+| Kartik Aaryan   | 159 Kolkata, West Bengal             |     18000 |
+| Geeta Iyer      | 321 Connaught Place, Delhi           |     35000 |
+| Karan Bansal    | 321 Mandi, Delhi                     |     35000 |
+| Ravi Mehta      | 456 Indore, Madhya Pradesh           |     18000 |
+| Sneha Singh     | 456 NH8, Delhi                       |     18000 |
+| Sunil Yadav     | 654 Marine Drive, Mumbai             |     18000 |
+| Deepak Bansal   | 753 Jaipur, Rajasthan                |     25000 |
+| Tanya Choudhury | 753 Surat, Gujarat                   |     18000 |
+| Amit Verma      | 789 Linking Road, Mumbai             |     25000 |
+| Vinay Gupta     | 789 Pune, Maharashtra                |     25000 |
+| Suresh Reddy    | 852 Hyderabad, Telangana             |     25000 |
+| Aishwarya Rai   | 963 Chennai, Tamil Nadu              |     35000 |
+| Priya Joshi     | 987 Fort, Mumbai                     |     25000 |
+| Rajesh Kumar    | Updated Address, Mumbai, Maharashtra |     25000 |
++-----------------+--------------------------------------+-----------+
+15 rows in set (0.01 sec)
+
+============================================================================================================================================================================================================
+10. Get a list of all tenants whose bank has more than 5 tenants associated with it.
+-- Retrieve tenants whose bank has more than 5 tenants associated
+SELECT t.TenantNames, b.BankName
+FROM tenant t
+JOIN bank b ON t.BankID = b.BankID
+WHERE b.BankID IN (
+    SELECT t.BankID
+    FROM tenant t
+    GROUP BY t.BankID
+    HAVING COUNT(t.TenantID) > 5
+);
+
+Empty set (0.00 sec)
+
+============================================================================================================================================================================================================
+11. Find all apartments that have never been rented.
+-- Retrieve apartments that have never been rented
+SELECT a.ApartmentNumber
+FROM apartment a
+LEFT JOIN rent r ON a.ApartmentID = r.ApartmentID
+WHERE r.ApartmentID IS NULL;
+
++-----------------+
+| ApartmentNumber |
++-----------------+
+| D-404           |
+| E-505           |
+| F-606           |
+| G-707           |
+| H-808           |
+| I-909           |
+| J-1010          |
+| K-1111          |
+| L-1212          |
+| M-1313          |
+| N-1414          |
+| O-1515          |
++-----------------+
+12 rows in set (0.00 sec)
+
+============================================================================================================================================================================================================
+12. Find the number of tenants renting apartments from each bank, grouped by bank.
+-- Retrieve number of tenants renting from each bank, grouped by bank
+SELECT b.BankName, COUNT(t.TenantID) AS TotalTenants
+FROM bank b
+JOIN tenant t ON b.BankID = t.BankID
+GROUP BY b.BankName;
+
++-----------------------+--------------+
+| BankName              | TotalTenants |
++-----------------------+--------------+
+| Bank of Maharashtra   |            1 |
+| HDFC Bank             |            1 |
+| ICICI Bank            |            1 |
+| Axis Bank             |            1 |
+| Punjab National Bank  |            1 |
+| Kotak Mahindra Bank   |            1 |
+| Bank of Baroda        |            1 |
+| Canara Bank           |            1 |
+| Indian Bank           |            1 |
+| Union Bank of India   |            1 |
+| Bank of India         |            1 |
+| Yes Bank              |            1 |
+| RBL Bank              |            1 |
+| IDFC First Bank       |            1 |
+| Central Bank of India |            1 |
++-----------------------+--------------+
+15 rows in set (0.00 sec)
+
+============================================================================================================================================================================================================
+13. Find the tenants who paid more than the average rent.
+-- Retrieve tenants who paid more than the average rent
+SELECT t.TenantNames, c.CountsSum
+FROM tenant t
+JOIN counts c ON t.TenantID = c.TenantID
+WHERE c.CountsSum > (SELECT AVG(CountsSum) FROM counts);
+
++-----------------+-----------+
+| TenantNames     | CountsSum |
++-----------------+-----------+
+| Rajesh Kumar    |     60000 |
+| Vinay Gupta     |     50000 |
+| Rohit Sharma    |     55000 |
+| Tanya Choudhury |     60000 |
+| Suresh Reddy    |     65000 |
+| Aishwarya Rai   |     70000 |
+| Kartik Aaryan   |     75000 |
+| Deepak Bansal   |     80000 |
++-----------------+-----------+
+8 rows in set (0.01 sec)
+
+============================================================================================================================================================================================================
+14. Find the most rented apartment and its total number of rentals.
+-- Retrieve the most rented apartment and its total rental count
+SELECT a.ApartmentNumber, COUNT(r.ApartmentID) AS TotalRentals
+FROM apartment a
+JOIN rent r ON a.ApartmentID = r.ApartmentID
+GROUP BY a.ApartmentNumber
+ORDER BY TotalRentals DESC
+LIMIT 1;
+
++-----------------+--------------+
+| ApartmentNumber | TotalRentals |
++-----------------+--------------+
+| B-202           |            6 |
++-----------------+--------------+
+1 row in set (0.01 sec)
+
+
+============================================================================================================================================================================================================
+============================================================================================================================================================================================================
+____________________________________________________________________________________________________________
+-----------------------Delete Queries-------------------------
+1. Delete a specific tenant.       
+                                                                    (Perform delete query 5 before 1)
+-- Deleting a specific tenant
+DELETE FROM tenant
+WHERE TenantID = 1; -- Replace with desired TenantID
+
+Before eXecution Tenant Table
++----------+-----------------+--------------------------------------+--------+-----------------+-------------------+
+| TenantID | TenantNames     | TenantLegalAddress                   | BankID | BankDirector    | Characteristic    |
++----------+-----------------+--------------------------------------+--------+-----------------+-------------------+
+|        1 | Rajesh Kumar    | Updated Address, Mumbai, Maharashtra |      1 | Anjali Sharma   | Software Engineer |
+|        2 | Sneha Singh     | 456 NH8, Delhi                       |      2 | Rahul Sharma    | Teacher           |
+|        3 | Amit Verma      | 789 Linking Road, Mumbai             |      3 | Pooja Verma     | Doctor            |
+|        4 | Geeta Iyer      | 321 Connaught Place, Delhi           |      4 | Kiran Iyer      | Artist            |
+|        5 | Sunil Yadav     | 654 Marine Drive, Mumbai             |      5 | Anjali Yadav    | Chef              |
+|        6 | Priya Joshi     | 987 Fort, Mumbai                     |      6 | Amit Joshi      | Entrepreneur      |
+|        7 | Karan Bansal    | 321 Mandi, Delhi                     |      7 | Sonam Bansal    | Lawyer            |
+|        8 | Ravi Mehta      | 456 Indore, Madhya Pradesh           |      8 | Neha Mehta      | Accountant        |
+|        9 | Vinay Gupta     | 789 Pune, Maharashtra                |      9 | Suman Gupta     | Consultant        |
+|       10 | Rohit Sharma    | 159 Ahmedabad, Gujarat               |     10 | Sita Sharma     | Scientist         |
+|       11 | Tanya Choudhury | 753 Surat, Gujarat                   |     11 | Vikas Choudhury | Marketing Manager |
+|       12 | Suresh Reddy    | 852 Hyderabad, Telangana             |     12 | Rita Reddy      | Pharmacist        |
+|       13 | Aishwarya Rai   | 963 Chennai, Tamil Nadu              |     13 | Ajay Rai        | Nurse             |
+|       14 | Kartik Aaryan   | 159 Kolkata, West Bengal             |     14 | Pooja Aaryan    | Designer          |
+|       15 | Deepak Bansal   | 753 Jaipur, Rajasthan                |     15 | Naina Bansal    | Researcher        |
++----------+-----------------+--------------------------------------+--------+-----------------+-------------------+
+
+After eXecution Tenant Table
++----------+-----------------+----------------------------+--------+-----------------+-------------------+
+| TenantID | TenantNames     | TenantLegalAddress         | BankID | BankDirector    | Characteristic    |
++----------+-----------------+----------------------------+--------+-----------------+-------------------+
+|        2 | Sneha Singh     | 456 NH8, Delhi             |      2 | Rahul Sharma    | Teacher           |
+|        3 | Amit Verma      | 789 Linking Road, Mumbai   |      3 | Pooja Verma     | Doctor            |
+|        4 | Geeta Iyer      | 321 Connaught Place, Delhi |      4 | Kiran Iyer      | Artist            |
+|        5 | Sunil Yadav     | 654 Marine Drive, Mumbai   |      5 | Anjali Yadav    | Chef              |
+|        6 | Priya Joshi     | 987 Fort, Mumbai           |      6 | Amit Joshi      | Entrepreneur      |
+|        7 | Karan Bansal    | 321 Mandi, Delhi           |      7 | Sonam Bansal    | Lawyer            |
+|        8 | Ravi Mehta      | 456 Indore, Madhya Pradesh |      8 | Neha Mehta      | Accountant        |
+|        9 | Vinay Gupta     | 789 Pune, Maharashtra      |      9 | Suman Gupta     | Consultant        |
+|       10 | Rohit Sharma    | 159 Ahmedabad, Gujarat     |     10 | Sita Sharma     | Scientist         |
+|       11 | Tanya Choudhury | 753 Surat, Gujarat         |     11 | Vikas Choudhury | Marketing Manager |
+|       12 | Suresh Reddy    | 852 Hyderabad, Telangana   |     12 | Rita Reddy      | Pharmacist        |
+|       13 | Aishwarya Rai   | 963 Chennai, Tamil Nadu    |     13 | Ajay Rai        | Nurse             |
+|       14 | Kartik Aaryan   | 159 Kolkata, West Bengal   |     14 | Pooja Aaryan    | Designer          |
+|       15 | Deepak Bansal   | 753 Jaipur, Rajasthan      |     15 | Naina Bansal    | Researcher        |
++----------+-----------------+----------------------------+--------+-----------------+-------------------+
+14 rows in set (0.00 sec)
+
+============================================================================================================================================================================================================
+2. Delete all rents for a specific tenant.
+-- Deleting all rent records for a specific tenant
+DELETE FROM rent
+WHERE TenantID = 1; -- Replace with desired TenantID
+
+Before eXecution rent Table
++--------+----------+-------------+------------+------------+
+| RentID | TenantID | ApartmentID | TermFrom   | TermUpto   |
++--------+----------+-------------+------------+------------+
+|      1 |        1 |           2 | 2022-05-01 | 2024-05-01 |
+|      2 |        2 |           1 | 2021-06-01 | 2023-06-01 |
+|      3 |        3 |           2 | 2021-09-01 | 2023-09-01 |
+|      4 |        4 |           3 | 2022-03-01 | 2024-03-01 |
+|      5 |        5 |           1 | 2022-11-01 | 2024-11-01 |
+|      6 |        6 |           2 | 2022-04-01 | 2024-04-01 |
+|      7 |        7 |           3 | 2021-12-01 | 2023-12-01 |
+|      8 |        8 |           1 | 2023-01-01 | 2025-01-01 |
+|      9 |        9 |           2 | 2023-02-01 | 2025-02-01 |
+|     10 |       10 |           3 | 2023-05-01 | 2025-05-01 |
+|     11 |       11 |           1 | 2023-06-01 | 2025-06-01 |
+|     12 |       12 |           2 | 2023-07-01 | 2025-07-01 |
+|     13 |       13 |           3 | 2023-08-01 | 2025-08-01 |
+|     14 |       14 |           1 | 2023-09-01 | 2025-09-01 |
+|     15 |       15 |           2 | 2023-10-01 | 2025-10-01 |
++--------+----------+-------------+------------+------------+
+15 rows in set (0.00 sec)
+After eXecution rent Table
++--------+----------+-------------+------------+------------+
+| RentID | TenantID | ApartmentID | TermFrom   | TermUpto   |
++--------+----------+-------------+------------+------------+
+|      2 |        2 |           1 | 2021-06-01 | 2023-06-01 |
+|      3 |        3 |           2 | 2021-09-01 | 2023-09-01 |
+|      4 |        4 |           3 | 2022-03-01 | 2024-03-01 |
+|      5 |        5 |           1 | 2022-11-01 | 2024-11-01 |
+|      6 |        6 |           2 | 2022-04-01 | 2024-04-01 |
+|      7 |        7 |           3 | 2021-12-01 | 2023-12-01 |
+|      8 |        8 |           1 | 2023-01-01 | 2025-01-01 |
+|      9 |        9 |           2 | 2023-02-01 | 2025-02-01 |
+|     10 |       10 |           3 | 2023-05-01 | 2025-05-01 |
+|     11 |       11 |           1 | 2023-06-01 | 2025-06-01 |
+|     12 |       12 |           2 | 2023-07-01 | 2025-07-01 |
+|     13 |       13 |           3 | 2023-08-01 | 2025-08-01 |
+|     14 |       14 |           1 | 2023-09-01 | 2025-09-01 |
+|     15 |       15 |           2 | 2023-10-01 | 2025-10-01 |
++--------+----------+-------------+------------+------------+
+14 rows in set (0.00 sec)
+
+============================================================================================================================================================================================================
+3. Delete a specific bank.       
+                                            (query 5 and 1 Must be executed before this)
+-- Deleting a specific bank
+DELETE FROM bank
+WHERE BankID = 1; -- Replace with desired BankID
+
+Before eXecution bank Table
++--------+-----------------------+------------------+
+| BankID | BankName              | RegistrationCode |
++--------+-----------------------+------------------+
+|      1 | Bank of Maharashtra   |              101 |
+|      2 | HDFC Bank             |              102 |
+|      3 | ICICI Bank            |              103 |
+|      4 | Axis Bank             |              104 |
+|      5 | Punjab National Bank  |              105 |
+|      6 | Kotak Mahindra Bank   |              106 |
+|      7 | Bank of Baroda        |              107 |
+|      8 | Canara Bank           |              108 |
+|      9 | Indian Bank           |              109 |
+|     10 | Union Bank of India   |              110 |
+|     11 | Bank of India         |              111 |
+|     12 | Yes Bank              |              112 |
+|     13 | RBL Bank              |              113 |
+|     14 | IDFC First Bank       |              114 |
+|     15 | Central Bank of India |              115 |
++--------+-----------------------+------------------+
+15 rows in set (0.00 sec)
+After eXecution bank Table
++--------+-----------------------+------------------+
+| BankID | BankName              | RegistrationCode |
++--------+-----------------------+------------------+
+|      2 | HDFC Bank             |              102 |
+|      3 | ICICI Bank            |              103 |
+|      4 | Axis Bank             |              104 |
+|      5 | Punjab National Bank  |              105 |
+|      6 | Kotak Mahindra Bank   |              106 |
+|      7 | Bank of Baroda        |              107 |
+|      8 | Canara Bank           |              108 |
+|      9 | Indian Bank           |              109 |
+|     10 | Union Bank of India   |              110 |
+|     11 | Bank of India         |              111 |
+|     12 | Yes Bank              |              112 |
+|     13 | RBL Bank              |              113 |
+|     14 | IDFC First Bank       |              114 |
+|     15 | Central Bank of India |              115 |
++--------+-----------------------+------------------+
+14 rows in set (0.00 sec)
+
+============================================================================================================================================================================================================
+4. Delete a specific apartment.
+-- First delete the dependent rows from the 'rent' table
+DELETE FROM rent WHERE ApartmentID = 1;
+-- Then delete the apartment
+DELETE FROM apartment WHERE ApartmentID = 1;
+
+Before eXecution apartment Table
++-------------+-----------------+---------------+--------+
+| ApartmentID | ApartmentNumber | ApartmentArea | TypeID |
++-------------+-----------------+---------------+--------+
+|           1 | A-101           |           900 |      1 |
+|           2 | B-202           |          1200 |      2 |
+|           3 | C-303           |          1400 |      3 |
+|           4 | D-404           |           800 |      1 |
+|           5 | E-505           |          1600 |      2 |
+|           6 | F-606           |          2000 |      3 |
+|           7 | G-707           |          1800 |      4 |
+|           8 | H-808           |          1100 |      5 |
+|           9 | I-909           |           950 |      6 |
+|          10 | J-1010          |          1300 |      7 |
+|          11 | K-1111          |          1450 |      8 |
+|          12 | L-1212          |          1050 |      9 |
+|          13 | M-1313          |          1250 |     10 |
+|          14 | N-1414          |          1550 |     11 |
+|          15 | O-1515          |          1700 |     12 |
++-------------+-----------------+---------------+--------+
+15 rows in set (0.00 sec)
+After eXecution apartment Table
++-------------+-----------------+---------------+--------+
+| ApartmentID | ApartmentNumber | ApartmentArea | TypeID |
++-------------+-----------------+---------------+--------+
+|           2 | B-202           |          1200 |      2 |
+|           3 | C-303           |          1400 |      3 |
+|           4 | D-404           |           800 |      1 |
+|           5 | E-505           |          1600 |      2 |
+|           6 | F-606           |          2000 |      3 |
+|           7 | G-707           |          1800 |      4 |
+|           8 | H-808           |          1100 |      5 |
+|           9 | I-909           |           950 |      6 |
+|          10 | J-1010          |          1300 |      7 |
+|          11 | K-1111          |          1450 |      8 |
+|          12 | L-1212          |          1050 |      9 |
+|          13 | M-1313          |          1250 |     10 |
+|          14 | N-1414          |          1550 |     11 |
+|          15 | O-1515          |          1700 |     12 |
++-------------+-----------------+---------------+--------+
+14 rows in set (0.00 sec)
+
+============================================================================================================================================================================================================
+5. Delete all entries from counts table.
+Before eXecution counts Table
++----------+-----------+------------+-------------+----------+
+| CountsID | CountsSum | CountsDate | CountsPenia | TenantID |
++----------+-----------+------------+-------------+----------+
+|        1 |     60000 | 2023-01-01 |           0 |        1 |
+|        2 |     15000 | 2023-02-01 |           0 |        2 |
+|        3 |     20000 | 2023-03-01 |           0 |        3 |
+|        4 |     25000 | 2023-04-01 |           0 |        4 |
+|        5 |     30000 | 2023-05-01 |           0 |        5 |
+|        6 |     35000 | 2023-06-01 |           0 |        6 |
+|        7 |     40000 | 2023-07-01 |           0 |        7 |
+|        8 |     45000 | 2023-08-01 |           0 |        8 |
+|        9 |     50000 | 2023-09-01 |           0 |        9 |
+|       10 |     55000 | 2023-10-01 |           0 |       10 |
+|       11 |     60000 | 2023-11-01 |           0 |       11 |
+|       12 |     65000 | 2023-12-01 |           0 |       12 |
+|       13 |     70000 | 2024-01-01 |           0 |       13 |
+|       14 |     75000 | 2024-02-01 |           0 |       14 |
+|       15 |     80000 | 2024-03-01 |           0 |       15 |
++----------+-----------+------------+-------------+----------+
+15 rows in set (0.00 sec)
+
+After eXecution counts Table
+ select * from counts;
+Empty set (0.00 sec)

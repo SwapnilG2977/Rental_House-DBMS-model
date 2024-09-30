@@ -1,0 +1,40 @@
+-- Adding entries to the "Banks" table
+INSERT INTO bank VALUES (1, 'State Bank of India', 101);
+INSERT INTO bank VALUES (2, 'HDFC Bank', 102);
+INSERT INTO bank VALUES (3, 'ICICI Bank', 103);
+INSERT INTO bank VALUES (4, 'Axis Bank', 104);
+INSERT INTO bank VALUES (5, 'Punjab National Bank', 105);
+INSERT INTO bank VALUES (6, 'Kotak Mahindra Bank', 106);
+INSERT INTO bank VALUES (7, 'Bank of Baroda', 107);
+INSERT INTO bank VALUES (8, 'Canara Bank', 108);
+INSERT INTO bank VALUES (9, 'Indian Bank', 109);
+INSERT INTO bank VALUES (10, 'Union Bank of India', 110);
+INSERT INTO bank VALUES (11, 'Bank of India', 111);
+INSERT INTO bank VALUES (12, 'Yes Bank', 112);
+INSERT INTO bank VALUES (13, 'RBL Bank', 113);
+INSERT INTO bank VALUES (14, 'IDFC First Bank', 114);
+INSERT INTO bank VALUES (15, 'Central Bank of India', 115);
+
+
++--------+-----------------------+------------------+
+| BankID | BankName              | RegistrationCode |
++--------+-----------------------+------------------+
+|      1 | State Bank of India   |              101 |
+|      2 | HDFC Bank             |              102 |
+|      3 | ICICI Bank            |              103 |
+|      4 | Axis Bank             |              104 |
+|      5 | Punjab National Bank  |              105 |
+|      6 | Kotak Mahindra Bank   |              106 |
+|      7 | Bank of Baroda        |              107 |
+|      8 | Canara Bank           |              108 |
+|      9 | Indian Bank           |              109 |
+|     10 | Union Bank of India   |              110 |
+|     11 | Bank of India         |              111 |
+|     12 | Yes Bank              |              112 |
+|     13 | RBL Bank              |              113 |
+|     14 | IDFC First Bank       |              114 |
+|     15 | Central Bank of India |              115 |
++--------+-----------------------+------------------+
+--Use Select * from Bank; to show the table values;
+
+
